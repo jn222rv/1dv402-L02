@@ -173,6 +173,20 @@ namespace L02._3
                     }
                 }
             }
+            
+            for (int i = 0; i < shape2D.Length; i++)
+            {
+                for (int j = 0; j < shape2D.Length; j++)
+                {
+                    int number = shape2D[i].CompareTo(shape2D[j]);
+                    if (number == -1)
+                    {
+                        Shape2D temp = shape2D[i];
+                        shape2D[i] = shape2D[j];
+                        shape2D[j] = temp;
+                    }
+                }
+            }
             return shape2D;
         }
         private static Shape3D[] Randomize3DShapes()
@@ -227,6 +241,21 @@ namespace L02._3
                     }
                 }
             }
+
+            for (int i = 0; i < shape3D.Length; i++ )
+            {
+                for(int j = 0; j < shape3D.Length; j++)
+                {
+                    int number = shape3D[i].CompareTo(shape3D[j]);
+                    if(number == -1)
+                    {
+                        Shape3D temp = shape3D[i];
+                        shape3D[i] = shape3D[j];
+                        shape3D[j] = temp;
+                    }
+                }
+            }
+
             return shape3D;
         }
         private static double[] ReadDimension(ShapeType shapeType)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace L02._3
 {
-    abstract class Shape3D : Shape
+    abstract class Shape3D : Shape, IComparable
     {
         protected Shape2D _baseShape;
         private double _height;
@@ -43,7 +43,30 @@ namespace L02._3
         }
         public int CompareTo(object obj)
         {
-            return 3;
+            if(obj == null)
+            {
+                return 5;
+            }
+
+            Shape3D shape3D = obj as Shape3D;
+
+            if(shape3D == null)
+            {
+                throw new ArgumentException();
+            }
+            else if(this.Volume < shape3D.Volume)
+            {
+                return -1;
+            }
+            else if(this.Volume > shape3D.Volume)
+            {
+                return 1;
+            }
+            else if(this.Volume == shape3D.Volume)
+            {
+                return 2;
+            }
+            return 0;
         }
         protected Shape3D(ShapeType shapeType, Shape2D baseShape, double height) : base(shapeType)
         {
