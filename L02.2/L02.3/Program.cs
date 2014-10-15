@@ -113,7 +113,9 @@ namespace L02._3
                     Console.ResetColor();
                 }
 
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
                 Console.Write("Tryck tangent för att fortsätta");
+                Console.ResetColor();
                 Console.ReadKey();
                 Console.Clear();
             }
@@ -196,9 +198,11 @@ namespace L02._3
         {
             Console.Clear();
 
+            Console.BackgroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("=======================================");
             Console.WriteLine(Extensions.CenterAlignString(Extensions.AsText(shapeType), "=                                     ="));
             Console.WriteLine("=======================================");
+            Console.ResetColor();
             Console.WriteLine();
 
             switch(shapeType)
@@ -287,6 +291,7 @@ namespace L02._3
             Console.WriteLine("6. Sfär.");
             Console.WriteLine("7. Slumpa 2D-figurer.");
             Console.WriteLine("8. Slumpa 3D-figurer.");
+            Console.WriteLine();
             Console.WriteLine("================================");
             Console.WriteLine();
             Console.Write("Ange menyval [0-8]: ");
@@ -294,9 +299,11 @@ namespace L02._3
         private static void ViewShapeDetail(Shape shape)
         {
             Console.WriteLine();
-            Console.WriteLine("-----------------------------------------");
-            Console.WriteLine("-                 Detaljer              -");
-            Console.WriteLine("-----------------------------------------");
+            Console.BackgroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("=======================================");
+            Console.WriteLine("=                 Detaljer            =");
+            Console.WriteLine("=======================================");
+            Console.ResetColor();
             Console.WriteLine();
             Console.WriteLine(shape.ToString());
         }
@@ -304,18 +311,22 @@ namespace L02._3
         {
             if(!shapes[0].IsShape3D)
             {
-                Console.WriteLine();
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("-----------------------------------------");
                 Console.WriteLine("Figur       Längd   Bredd Omkrets    Area");
                 Console.WriteLine("-----------------------------------------");
+                Console.ResetColor();
                 Console.WriteLine();
             }
             else if (shapes[0].IsShape3D)
             {
-                Console.WriteLine();
-                Console.WriteLine("-------------------------------------------------------------------------------");
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("----------------------------------------------------------------------");
                 Console.WriteLine("Figur       Längd  Bredd   Höjd   Mantelarea  Bergäns.area       Volym");
-                Console.WriteLine("-------------------------------------------------------------------------------");
+                Console.WriteLine("----------------------------------------------------------------------");
+                Console.ResetColor();
                 Console.WriteLine();
             }
             for(int i = 0; i < shapes.Length; i++)
