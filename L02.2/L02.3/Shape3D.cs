@@ -54,8 +54,7 @@ namespace L02._3
         {
             if (format == "G" || format == "" || format == null)
             {
-                return "meme";
-                //return String.Format("Längd  : {0,10:f1}\nBredd  : {1,10:f1}\nOmkrets: {2,10:f1}\nArea   : {3,10:f1}\n", _baseShape.Length, _baseShape.Width, Height, MantelArea, TotalSurfaceArea, Volume);
+                return String.Format("Längd: {0:f1}\nBredd: {1:f1}\nHöjd: {2:f1}\nMantelArea: {3:f1}\nBegränsningarea: {4:f1}\nVolym: {5:f1}\n", _baseShape.Length, _baseShape.Width, Height, MantelArea, TotalSurfaceArea, Volume);
             }
             else if (format == "R")
             {
