@@ -8,7 +8,7 @@ namespace _1DV402.S2.L1C
 {
     public class SecretNumber
     {
-        private GuessedNumber[] _guessedNumbers = new GuessedNumber[7] { new GuessedNumber(), new GuessedNumber(), new GuessedNumber(), new GuessedNumber(), new GuessedNumber(), new GuessedNumber(), new GuessedNumber() };
+        private GuessedNumber[] _guessedNumbers;
         private int? _number;
         public const int MaxNumberOfGuesses = 7;
 
@@ -31,10 +31,7 @@ namespace _1DV402.S2.L1C
         {
             get             
             {
-                GuessedNumber[] copyArray = new GuessedNumber[7] { new GuessedNumber(), new GuessedNumber(), new GuessedNumber(), new GuessedNumber(), new GuessedNumber(), new GuessedNumber(), new GuessedNumber() };
-                copyArray = _guessedNumbers;
-
-                return copyArray;
+                return _guessedNumbers.ToArray();
             }
         }
         public int? Number
@@ -50,7 +47,10 @@ namespace _1DV402.S2.L1C
                     return _number;
                 }
             }
-            private set { _number = value; }
+            private set 
+            { 
+                _number = value;
+            }
         }
         public Outcome Outcome
         {
@@ -65,6 +65,12 @@ namespace _1DV402.S2.L1C
             Number = null;
             Outcome = Outcome.Indefinite;
 
+            for (int i = 0; i < _guessedNumbers.Length; i++)
+            {
+                _guessedNumbers[i].Number = 0;
+                _guessedNumbers[i].Outcome = Outcome.Indefinite;
+            }
+            
             Random random = new Random();
             _number = random.Next(1,100);
         }
@@ -78,15 +84,6 @@ namespace _1DV402.S2.L1C
                 throw new ArgumentOutOfRangeException();
             }
 
-
-            if (Count > MaxNumberOfGuesses)
-            {
-                Outcome = Outcome.NoMoreGuesses;
-                Number = _number;
-                CanMakeGuess = false;
-                Count = 7;
-                return Outcome;
-            }
             for (int i = 0; i < Count - 1; i++)
             {
                 if (GuessedNumbers[i].Number == Guess)
@@ -97,6 +94,15 @@ namespace _1DV402.S2.L1C
                 }
             }
 
+            if (Count > MaxNumberOfGuesses)
+            {
+                Outcome = Outcome.NoMoreGuesses;
+                Number = _number;
+                CanMakeGuess = false;
+                Count = 7;
+                return Outcome;
+            }
+            
             if (Guess < _number)
             {
                 if (Count == MaxNumberOfGuesses)
@@ -104,12 +110,13 @@ namespace _1DV402.S2.L1C
                     Outcome = Outcome.NoMoreGuesses;
                     Number = _number;
                     CanMakeGuess = false;
+                    Count = 7;
                     return Outcome;
                 }
                 Outcome = Outcome.Low;
-                GuessedNumbers[Count - 1].Number = Guess;
-                GuessedNumbers[Count - 1].Outcome = Outcome;
-                return Outcome.Low;
+                _guessedNumbers[Count - 1].Number = Guess;
+                _guessedNumbers[Count - 1].Outcome = Outcome;
+                return Outcome;
             }
             else if (Guess > _number)
             {
@@ -118,18 +125,19 @@ namespace _1DV402.S2.L1C
                     Outcome = Outcome.NoMoreGuesses;
                     Number = _number;
                     CanMakeGuess = false;
+                    Count = 7;
                     return Outcome;
                 }
                 Outcome = Outcome.High;
-                GuessedNumbers[Count - 1].Number = Guess;
-                GuessedNumbers[Count - 1].Outcome = Outcome;
+                _guessedNumbers[Count - 1].Number = Guess;
+                _guessedNumbers[Count - 1].Outcome = Outcome;
                 return Outcome;
             }
             else
             {
                 Outcome = Outcome.Right;
-                GuessedNumbers[Count - 1].Number = Guess;
-                GuessedNumbers[Count - 1].Outcome = Outcome;
+                _guessedNumbers[Count - 1].Number = Guess;
+                _guessedNumbers[Count - 1].Outcome = Outcome;
                 CanMakeGuess = false;
                 return Outcome;
             }
@@ -138,10 +146,8 @@ namespace _1DV402.S2.L1C
         public SecretNumber()
         {
             Outcome = new Outcome();
-            for (int i = 0; i < 7; i++)
-            {
-                GuessedNumber[] GuessedNumbers = new GuessedNumber[7] { new GuessedNumber(), new GuessedNumber(), new GuessedNumber(), new GuessedNumber(), new GuessedNumber(), new GuessedNumber(), new GuessedNumber() };
-            }
+            _guessedNumbers = new GuessedNumber[7] { new GuessedNumber(), new GuessedNumber(), new GuessedNumber(), new GuessedNumber(), new GuessedNumber(), new GuessedNumber(), new GuessedNumber() };
+          
             Initialize();
         }
     }
