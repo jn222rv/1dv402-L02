@@ -24,7 +24,7 @@ namespace _1DV402.S2.L1C
             {
                 // Initiera ny spelomgång.
                 secretNumber.Initialize();
-
+                
                 // Låt användaren gissa så länge det finns gissningar kvar. 
                 while (secretNumber.CanMakeGuess)
                 {
@@ -37,6 +37,7 @@ namespace _1DV402.S2.L1C
                     Console.WriteLine(" ║ Gissa det hemliga talet mellan 1-100 ║ ");
                     Console.WriteLine(" ╚══════════════════════════════════════╝ \n");
                     Console.ResetColor();
+                    
                     if (secretNumber.Count > 0)
                     {
                         Console.ForegroundColor = ConsoleColor.White;

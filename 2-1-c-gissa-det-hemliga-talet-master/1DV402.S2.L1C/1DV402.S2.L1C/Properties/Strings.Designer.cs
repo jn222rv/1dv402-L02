@@ -61,7 +61,7 @@ namespace _1DV402.S2.L1C.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  Inga fler gissningar! Det hemliga talet var {0}..
+        ///   Looks up a localized string similar to Det hemliga talet var {0}..
         /// </summary>
         internal static string Cannot_Guess {
             get {
@@ -189,7 +189,7 @@ namespace _1DV402.S2.L1C.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Inga fler gissningar!.
+        ///   Looks up a localized string similar to Inga fler gissningar! .
         /// </summary>
         internal static string Outcome_NoMoreGuesses {
             get {
