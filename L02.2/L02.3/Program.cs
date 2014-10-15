@@ -211,20 +211,20 @@ namespace L02._3
                 switch (shapeType)
                 {
                     case ShapeType.Cuboid:
-                        {
-                            shape3D[i] = new Cuboid(firstDimension, SecondDimension, thirdDimension);
-                            break;
-                        }
+                    {
+                        shape3D[i] = new Cuboid(firstDimension, SecondDimension, thirdDimension);
+                        break;
+                    }
                     case ShapeType.Cylinder:
-                        {
-                            shape3D[i] = new Cylinder(firstDimension, SecondDimension, thirdDimension);
-                            break;
-                        }
+                    {
+                        shape3D[i] = new Cylinder(firstDimension, SecondDimension, thirdDimension);
+                        break;
+                    }
                     case ShapeType.Sphere:
-                        {
-                            shape3D[i] = new Sphere(firstDimension);
-                            break;
-                        }
+                    {
+                        shape3D[i] = new Sphere(firstDimension);
+                        break;
+                    }
                 }
             }
             return shape3D;
@@ -252,13 +252,13 @@ namespace L02._3
                     return ReadDoublesGreaterThanZero("Skriv in radius: ", 1);
 
                 case ShapeType.Cylinder:
-                    return ReadDoublesGreaterThanZero("Skriv in höjddiamtern, bredddiametern och längd: ", 3);
+                    return ReadDoublesGreaterThanZero("Skriv in längddiamtern, breddiametern och höjd: ", 3);
 
                 case ShapeType.Rectangle:
-                    return ReadDoublesGreaterThanZero("Skriv in längd, bredd: ", 2);
+                    return ReadDoublesGreaterThanZero("Skriv in längd och bredd: ", 2);
 
                 case ShapeType.Ellipse:
-                    return ReadDoublesGreaterThanZero("Skriv in höjddiameter, bredddiameter: ", 2);
+                    return ReadDoublesGreaterThanZero("Skriv in längddiameter och breddiameter: ", 2);
 
                 default:
                     throw new ArgumentException();
