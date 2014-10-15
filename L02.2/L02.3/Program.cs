@@ -270,11 +270,13 @@ namespace L02._3
         }
         private static void ViewMenu()
         {
+            Console.BackgroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("================================");
             Console.WriteLine("=                              =");
             Console.WriteLine("=           Figurer            =");
             Console.WriteLine("=                              =");
             Console.WriteLine("================================");
+            Console.ResetColor();
             Console.WriteLine();
             Console.WriteLine("0. Avsluta.");
             Console.WriteLine("1. Rektangel.");
