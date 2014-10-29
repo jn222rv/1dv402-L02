@@ -98,8 +98,7 @@ namespace L02._3
                             }
                         case 8:
                             {
-                                Shape3D[] shape3D = Randomize3DShapes();
-                                ViewShapes(shape3D);
+                                ViewShapes(Randomize3DShapes());
                                 break;
                             }
                     }
@@ -113,8 +112,12 @@ namespace L02._3
                     Console.ResetColor();
                 }
 
-                Console.Write("Tryck tangent för att fortsätta");
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.Write("   Tryck tangent för att fortsätta   ");
+                Console.ResetColor();
+                Console.CursorVisible = false;
                 Console.ReadKey();
+                Console.CursorVisible = true;
                 Console.Clear();
             }
             while (true);
@@ -125,32 +128,62 @@ namespace L02._3
             int numberOfShapes = myRandom.Next(5, 21);
 
             Shape2D[] shape2D = new Shape2D[numberOfShapes];
+            ShapeType shapeType;
 
             for(int i = 0; i < numberOfShapes; i++)
             {
-                int shapeType = myRandom.Next(3);
+                int randomNumber = myRandom.Next(3);
+
+                if (randomNumber == 0)
+                {
+                    shapeType = ShapeType.Ellipse;
+                }
+                else if (randomNumber == 1)
+                {
+                    shapeType = ShapeType.Circle;
+                }
+                else if (randomNumber == 2)
+                {
+                    shapeType = ShapeType.Rectangle;
+                }
+                else
+                {
+                    throw new ArgumentException();
+                }
+
+                double firstDimension = myRandom.Next(5, 100) + myRandom.NextDouble();
+                double secondDimension = myRandom.Next(5, 100) + myRandom.NextDouble();
 
                 switch(shapeType)
                 {
-                    case 0:
+                    case ShapeType.Circle:
                     {
-                        double dimension = myRandom.Next(5, 100) + myRandom.NextDouble();
-                        shape2D[i] = new Ellipse(dimension);
+                        shape2D[i] = new Ellipse(firstDimension);
                         break;
                     }
-                    case 1:
+                    case ShapeType.Ellipse:
                     {
-                        double firstDimension = myRandom.Next(5, 100) + myRandom.NextDouble();
-                        double secondDimension = myRandom.Next(5, 100) + myRandom.NextDouble();
                         shape2D[i] = new Ellipse(firstDimension, secondDimension);
                         break;
                     }
-                    case 2:
+                    case ShapeType.Rectangle:
                     {
-                        double firstDimension = myRandom.Next(5, 100) + myRandom.NextDouble();
-                        double secondDimension = myRandom.Next(5, 100) + myRandom.NextDouble();
                         shape2D[i] = new Rectangle(firstDimension, secondDimension);
                         break;
+                    }
+                }
+            }
+            
+            for (int i = 0; i < shape2D.Length; i++)
+            {
+                for (int j = 0; j < shape2D.Length; j++)
+                {
+                    int number = shape2D[i].CompareTo(shape2D[j]);
+                    if (number == -1)
+                    {
+                        Shape2D temp = shape2D[i];
+                        shape2D[i] = shape2D[j];
+                        shape2D[j] = temp;
                     }
                 }
             }
@@ -162,10 +195,28 @@ namespace L02._3
             int numberOfShapes = myRandom.Next(5, 21);
 
             Shape3D[] shape3D = new Shape3D[numberOfShapes];
+            ShapeType shapeType;
 
             for (int i = 0; i < numberOfShapes; i++)
             {
-                int shapeType = myRandom.Next(3);
+                int randomNumber = myRandom.Next(3,6);
+
+                if(randomNumber == 3)
+                {
+                    shapeType = ShapeType.Cuboid;
+                }
+                else if(randomNumber == 4)
+                {
+                    shapeType = ShapeType.Cylinder;
+                }
+                else if (randomNumber == 5)
+                {
+                    shapeType = ShapeType.Sphere;
+                }
+                else
+                {
+                    throw new ArgumentException();
+                }
 
                 double firstDimension = myRandom.Next(5, 100) + myRandom.NextDouble();
                 double SecondDimension = myRandom.Next(5, 100) + myRandom.NextDouble();
@@ -173,32 +224,49 @@ namespace L02._3
 
                 switch (shapeType)
                 {
-                    case 0:
-                        {
-                            shape3D[i] = new Cuboid(firstDimension,SecondDimension, thirdDimension);
-                            break;
-                        }
-                    case 1:
-                        {
-                            shape3D[i] = new Cylinder(firstDimension, SecondDimension, thirdDimension);
-                            break;
-                        }
-                    case 2:
-                        {
-                            shape3D[i] = new Sphere(firstDimension/2);
-                            break;
-                        }
+                    case ShapeType.Cuboid:
+                    {
+                        shape3D[i] = new Cuboid(firstDimension, SecondDimension, thirdDimension);
+                        break;
+                    }
+                    case ShapeType.Cylinder:
+                    {
+                        shape3D[i] = new Cylinder(firstDimension, SecondDimension, thirdDimension);
+                        break;
+                    }
+                    case ShapeType.Sphere:
+                    {
+                        shape3D[i] = new Sphere(firstDimension);
+                        break;
+                    }
                 }
             }
+
+            for (int i = 0; i < shape3D.Length; i++ )
+            {
+                for(int j = 0; j < shape3D.Length; j++)
+                {
+                    int number = shape3D[i].CompareTo(shape3D[j]);
+                    if(number == -1)
+                    {
+                        Shape3D temp = shape3D[i];
+                        shape3D[i] = shape3D[j];
+                        shape3D[j] = temp;
+                    }
+                }
+            }
+
             return shape3D;
         }
         private static double[] ReadDimension(ShapeType shapeType)
         {
             Console.Clear();
 
+            Console.BackgroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("=======================================");
             Console.WriteLine(Extensions.CenterAlignString(Extensions.AsText(shapeType), "=                                     ="));
             Console.WriteLine("=======================================");
+            Console.ResetColor();
             Console.WriteLine();
 
             switch(shapeType)
@@ -213,13 +281,13 @@ namespace L02._3
                     return ReadDoublesGreaterThanZero("Skriv in radius: ", 1);
 
                 case ShapeType.Cylinder:
-                    return ReadDoublesGreaterThanZero("Skriv in höjddiamtern, bredddiametern och längd: ", 3);
+                    return ReadDoublesGreaterThanZero("Skriv in längddiamtern, breddiametern och höjd: ", 3);
 
                 case ShapeType.Rectangle:
-                    return ReadDoublesGreaterThanZero("Skriv in längd, bredd: ", 2);
+                    return ReadDoublesGreaterThanZero("Skriv in längd och bredd: ", 2);
 
                 case ShapeType.Ellipse:
-                    return ReadDoublesGreaterThanZero("Skriv in höjddiameter, bredddiameter: ", 2);
+                    return ReadDoublesGreaterThanZero("Skriv in längddiameter och breddiameter: ", 2);
 
                 default:
                     throw new ArgumentException();
@@ -228,53 +296,50 @@ namespace L02._3
         private static double[] ReadDoublesGreaterThanZero(string prompt, int numberOfValues = 1)
         {
             double[] db = new double[numberOfValues];
-            double index = 0;
-            bool correctDouble = true;
+            double doubleOut = 0;
             do
             {
                 Console.Write(prompt);
-                string str = Console.ReadLine();
+                string[] str = Console.ReadLine().Split(' ');
                 Console.WriteLine();
-                string[] str1 = str.Split(' ');
 
-                if(str1.Length != numberOfValues)
+                if(str.Length != numberOfValues)
                 {
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.WriteLine("FEL! Ett fel inträffade när figuerens dimensioner skulle tolkas.");
                     Console.ResetColor();
                     Console.WriteLine();
-                    correctDouble = true;
                 }
                 else
                 {
                     for (int i = 0; i < numberOfValues; i++)
                     {
-                        if (double.TryParse(str1[i], out index))
+                        if (double.TryParse(str[i], out doubleOut) && doubleOut>0)
                         {
-                            db[i] = double.Parse(str1[i]);
-                            correctDouble = false;
+                            db[i] = doubleOut;
                         }
                         else
                         {
                             Console.BackgroundColor = ConsoleColor.Red;
                             Console.WriteLine("FEL! Ett fel inträffade när figuerens dimensioner skulle tolkas.");
                             Console.ResetColor();
-                            Console.WriteLine();                    
-                            correctDouble = true;
+                            Console.WriteLine();
                             break;
                         }
                     }
                 }
-            } while (correctDouble);
+            } while (db.Last() == 0);
             return db;
         }
         private static void ViewMenu()
         {
+            Console.BackgroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("================================");
             Console.WriteLine("=                              =");
             Console.WriteLine("=           Figurer            =");
             Console.WriteLine("=                              =");
             Console.WriteLine("================================");
+            Console.ResetColor();
             Console.WriteLine();
             Console.WriteLine("0. Avsluta.");
             Console.WriteLine("1. Rektangel.");
@@ -285,6 +350,7 @@ namespace L02._3
             Console.WriteLine("6. Sfär.");
             Console.WriteLine("7. Slumpa 2D-figurer.");
             Console.WriteLine("8. Slumpa 3D-figurer.");
+            Console.WriteLine();
             Console.WriteLine("================================");
             Console.WriteLine();
             Console.Write("Ange menyval [0-8]: ");
@@ -292,9 +358,11 @@ namespace L02._3
         private static void ViewShapeDetail(Shape shape)
         {
             Console.WriteLine();
-            Console.WriteLine("-----------------------------------------");
-            Console.WriteLine("-                 Detaljer              -");
-            Console.WriteLine("-----------------------------------------");
+            Console.BackgroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("=======================================");
+            Console.WriteLine("=                 Detaljer            =");
+            Console.WriteLine("=======================================");
+            Console.ResetColor();
             Console.WriteLine();
             Console.WriteLine(shape.ToString());
         }
@@ -302,18 +370,22 @@ namespace L02._3
         {
             if(!shapes[0].IsShape3D)
             {
-                Console.WriteLine();
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("-----------------------------------------");
                 Console.WriteLine("Figur       Längd   Bredd Omkrets    Area");
                 Console.WriteLine("-----------------------------------------");
+                Console.ResetColor();
                 Console.WriteLine();
             }
             else if (shapes[0].IsShape3D)
             {
-                Console.WriteLine();
-                Console.WriteLine("-------------------------------------------------------------------------------");
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("----------------------------------------------------------------------");
                 Console.WriteLine("Figur       Längd  Bredd   Höjd   Mantelarea  Bergäns.area       Volym");
-                Console.WriteLine("-------------------------------------------------------------------------------");
+                Console.WriteLine("----------------------------------------------------------------------");
+                Console.ResetColor();
                 Console.WriteLine();
             }
             for(int i = 0; i < shapes.Length; i++)

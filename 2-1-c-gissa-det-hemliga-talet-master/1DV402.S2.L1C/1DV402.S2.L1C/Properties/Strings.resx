@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Cannot_Guess" xml:space="preserve">
-    <value> Inga fler gissningar! Det hemliga talet var {0}.</value>
+    <value>Det hemliga talet var {0}.</value>
   </data>
   <data name="Continue_Prompt" xml:space="preserve">
     <value>Nytt hemligt nummer? [N] avbryter.</value>
@@ -162,7 +162,7 @@
     <value>{0} är för lågt.</value>
   </data>
   <data name="Outcome_NoMoreGuesses" xml:space="preserve">
-    <value>Inga fler gissningar!</value>
+    <value>Inga fler gissningar! </value>
   </data>
   <data name="Outcome_OldGuess" xml:space="preserve">
     <value>Du har redan gissat på talet {0}!</value>

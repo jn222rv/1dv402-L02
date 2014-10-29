@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace L02._3
 {
-    abstract class Shape2D : Shape
+    abstract class Shape2D : Shape, IComparable
     {
         private double _length;
         private double _width;
@@ -57,7 +57,30 @@ namespace L02._3
         }
         public int CompareTo(object obj)
         {
-            return 3;
+            if (obj == null)
+            {
+                return 5;
+            }
+
+            Shape2D shape2D = obj as Shape2D;
+
+            if(shape2D == null)
+            {
+                throw new ArgumentException();
+            }
+            else if(this.Area < shape2D.Area)
+            {
+                return -1;
+            }
+            else if(this.Area > shape2D.Area)
+            {
+                return 1;
+            }
+            else if(this.Area == shape2D.Area)
+            {
+                return 2;
+            }
+            return 0;
         }
         protected Shape2D(ShapeType shapeType, double length, double width) : base(shapeType)
         {

@@ -37,15 +37,8 @@ namespace _1DV402.S2.L1C
         public int? Number
         {            
             get 
-            { 
-                if(CanMakeGuess)
-                {
-                    return null;
-                }
-                else
-                {
-                    return _number;
-                }
+            {
+                return CanMakeGuess ? null : _number;
             }
             private set 
             { 
@@ -54,7 +47,7 @@ namespace _1DV402.S2.L1C
         }
         public Outcome Outcome
         {
-            get; 
+            get;
             private set;
         }
         public void Initialize()
@@ -62,7 +55,6 @@ namespace _1DV402.S2.L1C
             CanMakeGuess = true;
             Count = 0;
             Guess = null;
-            Number = null;
             Outcome = Outcome.Indefinite;
 
             for (int i = 0; i < _guessedNumbers.Length; i++)
@@ -72,7 +64,7 @@ namespace _1DV402.S2.L1C
             }
             
             Random random = new Random();
-            _number = random.Next(1,100);
+            _number = random.Next(1, 101);
         }
         public Outcome MakeGuess(int number)
         {
